@@ -1,14 +1,18 @@
 import { useState } from "react";
 import { SigninReq } from "../api/Signin";
 import { HandPlatter } from "lucide-react";
-
 import Cookies from "js-cookie";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useUserInfo } from "../store/userStore";
+
 const Signin = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const setUsername = useUserInfo((state) => state.setUsername);
+  const setUserRole = useUserInfo((state) => state.setUserRole);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,6 +21,8 @@ const Signin = () => {
       setError(false);
       const response = await SigninReq(formData);
       const token = response?.data?.data?.token;
+      setUsername(response.data?.data?.user?.name);
+      setUserRole(response.data?.data?.user?.role);
       Cookies.set("party_menu_token", token, { expires: 1 });
       navigate("/", { replace: true });
     } catch (error) {
