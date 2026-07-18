@@ -41,7 +41,7 @@ const MainMenu = () => {
 
 
   return (
-    <div className=" min-h-screen bg-[#0F0F11] py-10 text-white ">
+    <div className=" min-h-screen bg-[#0F0F11] py-10 text-white px-2">
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between">
           <div className="">
@@ -49,7 +49,7 @@ const MainMenu = () => {
             <h1 className=" text-3xl font-semibold">Party Menu</h1>
             <p className="text-gray-400">Welcome, {user}</p>
           </div>
-          <div className="text-gray-400 flex gap-2">
+          <div className="text-gray-400 flex flex-col md:flex-row gap-2">
             <button
               onClick={() => navigate("/saved-recipes")}
               className="h-9 w-full border rounded px-2 my-auto cursor-pointer hover:border-amber-600 "
@@ -75,7 +75,7 @@ const MainMenu = () => {
         <section className="bg-[#1A1A22] p-5 my-5 space-y-2">
           <>
             <p className="text-sm text-gray-400">CATEGORY</p>
-            <div className=" flex gap-2 mt-2 text-sm">
+            <div className=" flex flex-wrap gap-2 mt-2 text-sm">
               <button
                 className={` ${category === "All" ? "bg-[#E85C05] border-[#E85C05] " : "bg-black border-gray-400 "}  hover:border-[#E85C05] hover:cursor-pointer min-w-14 border  rounded-full p-2`}
                 onClick={() => setCategory("All")}
@@ -156,7 +156,7 @@ const MainMenu = () => {
 
         <section>
           {filteredMenus.length > 0 ? (
-            <div className="grid grid-cols-3 gap-5">
+            <div className="grid grid-cols-1  md:grid-cols-3 md:gap-5">
               {filteredMenus.map((menu) => (
                 <RecipeCard key={menu.id} menu={menu} />
               ))}

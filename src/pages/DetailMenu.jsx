@@ -28,9 +28,9 @@ const DetailMenu = () => {
   console.log(IsToggle);
 
   return (
-    <div className="max-w-6xl mx-auto text-gray-400 my-5">
-      <div className="flex justify-between">
-        <Link to={"/"} className="flex  p-2 border gap-1 rounded ">
+    <div className="max-w-6xl mx-auto text-gray-400 my-5 px-2">
+      <div className="flex flex-col md:flex-row justify-between space-y-2">
+        <Link to={"/"} className="flex  p-2 border gap-1 rounded max-w-40">
           <MoveLeft /> Back to Menu
         </Link>
         <div className=" flex gap-3">
@@ -44,7 +44,7 @@ const DetailMenu = () => {
                 SaveRecipeTog(numId);
                 setIsToggle((prev) => !prev);
               }}
-              className="flex gap-1 border-green-400 text-green-400 hover:cursor-pointer p-2 border  rounded "
+              className="flex items-center gap-1 border-green-400 text-green-400 hover:cursor-pointer p-2 border  rounded "
             >
               <Check />
               Save Recipe
@@ -55,7 +55,7 @@ const DetailMenu = () => {
                 SaveRecipeTog(numId);
                 setIsToggle((prev) => !prev);
               }}
-              className="hover:cursor-pointer  p-2 border  rounded "
+              className="hover:cursor-pointer  p-2 border  rounded flex justify-center items-center"
             >
               Save Recipe
             </button>
@@ -63,7 +63,7 @@ const DetailMenu = () => {
         </div>
       </div>
 
-      <section className="w-full my-5 flex gap-5">
+      <section className="w-full my-5 flex flex-col md:flex-row gap-5">
         <div className="w-full md:w-1/2  ">
           {" "}
           <img

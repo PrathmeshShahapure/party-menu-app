@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const RecipeCard = ({ menu, removeButton }) => {
   const navigate = useNavigate();
   return (
-    <div className="bg-[#1A1A22] rounded-2xl border border-gray-500 hover:border-[#E85C05] hover:cursor-pointer">
+    <div className="bg-[#1A1A22] mt-2  rounded-2xl border border-gray-500 hover:border-[#E85C05] hover:cursor-pointer">
       <div onClick={() => navigate(`/menu/${menu.id}`)} className="">
         <div className="relative">
           <img
