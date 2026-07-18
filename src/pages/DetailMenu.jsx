@@ -1,13 +1,32 @@
-import React from "react";
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import menuData from "../data/menuData";
-import { MoveLeft } from "lucide-react";
+import { Check, MoveLeft } from "lucide-react";
 
 const DetailMenu = () => {
   const { id } = useParams();
-  console.log(id);
-    const menuDetails = menuData.find((m) => m.id == id);
-    const { ingredients } = menuDetails;
+  const arr =
+    JSON.parse(localStorage.getItem("party_menu_saved_recipes")) || [];
+  const [IsToggle, setIsToggle] = useState(arr.includes(id));
+
+ 
+  const menuDetails = menuData.find((m) => m.id == id);
+  const { ingredients } = menuDetails;
+  const recipesArr = [];
+  const SaveRecipeTog = (id) => {
+    if (arr.includes(id)) {
+      const updated = arr.filter((i) => i !== id);
+      localStorage.setItem("party_menu_saved_recipes", JSON.stringify(updated));
+    } else {
+      recipesArr.push(id);
+      localStorage.setItem(
+        "party_menu_saved_recipes",
+        JSON.stringify(recipesArr),
+      );
+    }
+  };
+  console.log(IsToggle);
+
   return (
     <div className="max-w-6xl mx-auto text-gray-400 my-5">
       <div className="flex justify-between">
@@ -15,8 +34,32 @@ const DetailMenu = () => {
           <MoveLeft /> Back to Menu
         </Link>
         <div className=" flex gap-3">
-          <Link className="  p-2 border  rounded ">Saved Recipes</Link>
-          <Link className="  p-2 border  rounded ">Save Recipe</Link>
+          <Link to={"/saved-recipes"} className="  p-2 border  rounded ">
+            Saved Recipes
+          </Link>
+
+          {IsToggle ? (
+            <button
+              onClick={() => {
+                SaveRecipeTog(id);
+                setIsToggle((prev) => !prev);
+              }}
+              className="flex gap-1 border-green-400 text-green-400 hover:cursor-pointer p-2 border  rounded "
+            >
+              <Check />
+              Save Recipe
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                SaveRecipeTog(id);
+                setIsToggle((prev) => !prev);
+              }}
+              className="hover:cursor-pointer  p-2 border  rounded "
+            >
+              Save Recipe
+            </button>
+          )}
         </div>
       </div>
 
@@ -61,7 +104,10 @@ const DetailMenu = () => {
         <p className="text-white text-2xl font-semibold">Ingredients</p>
         <ul>
           {ingredients.map((ig) => (
-            <li className="flex rounded p-2 my-2 justify-between bg-black ">
+            <li
+              key={ig.name}
+              className="flex rounded p-2 my-2 justify-between bg-black "
+            >
               {" "}
               <p className="text-white"> {ig.name}</p>
               <p className="text-white"> {ig.quantity}</p>

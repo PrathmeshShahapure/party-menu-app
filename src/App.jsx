@@ -21,8 +21,8 @@ function App() {
       />
 
       <Route path="/menu/:id" element={<DetailMenu />} />
-      <Route path="/saved-recipes" element={<SavedRecipes/>} />
-      <Route path="*" element={<NotFound/>} />
+      <Route path="/saved-recipes" element={<SavedRecipes />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

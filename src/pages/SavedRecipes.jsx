@@ -2,7 +2,7 @@ import React from 'react'
 
 const SavedRecipes = () => {
   return (
-    <div>SavedRecipes</div>
+    <div className='text-white'>SavedRecipes</div>
   )
 }
 
