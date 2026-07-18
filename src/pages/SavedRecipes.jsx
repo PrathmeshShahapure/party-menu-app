@@ -31,11 +31,34 @@ const SavedRecipes = () => {
       </div>
 
       <section>
-        <div className="grid grid-cols-3 gap-5 mt-5">
+       
+        {getSavedRecipesDetails.length>0 ? <div className="grid grid-cols-3 gap-5 mt-5">
           {getSavedRecipesDetails.map((menu) => (
-            <RecipeCard key={menu.id} menu={menu} removeButton={ <button className="w-full h-9 rounded-b-2xl hover:cursor-pointer bg-red-900/50 border border-gray-600 " onClick={()=>removeRecipe(menu.id)} >Remove </button> } />
+            <RecipeCard
+              key={menu.id}
+              menu={menu}
+              removeButton={
+                <button
+                  className="w-full h-9 rounded-b-2xl hover:cursor-pointer bg-red-900/50 border border-gray-600 "
+                  onClick={() => removeRecipe(menu.id)}
+                >
+                  Remove{" "}
+                </button>
+              }
+            />
           ))}
+          </div>
+           : 
+          
+            <div className='flex flex-col justify-center items-center w-full mt-50'>
+              <h2 className="text-lg  text-gray-400"> No saved recipes yet</h2>
+               <Link to={"/"} className=' text-xl hover:cursor-pointer text-amber-600 font-bold'>Browse the menu</Link>
         </div>
+        
+           }
+
+         
+      
       </section>
     </div>
   );

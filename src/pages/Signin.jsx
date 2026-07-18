@@ -62,6 +62,7 @@ const Signin = () => {
           <input
             className=" h-8 px-2 border border-gray-400 rounded focus:outline-none focus:ring-0 focus:border-[#f59052]"
             id="email"
+            placeholder="admin@example.com"
             value={formData.email}
             onChange={(e) =>
               setFormData((prev) => ({ ...prev, email: e.target.value }))
@@ -73,6 +74,7 @@ const Signin = () => {
           <input
             className=" h-8 px-2 border border-gray-400 rounded focus:outline-none focus:ring-0 focus:border-[#f59052]"
             id="password"
+            placeholder="Enter your password"
             value={formData.password}
             onChange={(e) =>
               setFormData((prev) => ({ ...prev, password: e.target.value }))

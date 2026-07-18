@@ -14,7 +14,10 @@ const MainMenu = () => {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
   const [diet, setDiet] = useState("All");
+  const [filterCount,setFiltercount]=useState(menuData.length)
   
+  const totalRes = JSON.parse(localStorage.getItem("party_menu_saved_recipes")) || [];
+  const count = totalRes.length;
 
   const searchByName = () => {
     
@@ -27,7 +30,7 @@ const MainMenu = () => {
       return categoryFilter && dietFilter && searchFilter;
       
     })
-    
+     setFiltercount(items.length)
     setFilteredMenus(items)
 
   }
@@ -47,15 +50,22 @@ const MainMenu = () => {
             <p className="text-gray-400">Welcome, {user}</p>
           </div>
           <div className="text-gray-400 flex gap-2">
-            <button className="h-9 border rounded px-2 my-auto cursor-pointer">
-              Save Recipes
+            <button
+              onClick={() => navigate("/saved-recipes")}
+              className="h-9 w-full border rounded px-2 my-auto cursor-pointer hover:border-amber-600 "
+            >
+              Save Recipes{" "}
+              <p className="bg-amber-600 inline h-8 w-10 p-1 text-white rounded-full">
+                {" "}
+                {count}
+              </p>
             </button>
             <button
               onClick={() => {
                 Cookies.remove("party_menu_token");
                 navigate("/signin");
               }}
-              className="h-9 border rounded px-2 my-auto cursor-pointer"
+              className="h-9 border rounded px-2 my-auto cursor-pointer hover:border-amber-600 "
             >
               logout
             </button>
@@ -123,12 +133,13 @@ const MainMenu = () => {
             </div>
           </>
 
-          <div className="flex  gap-4 mt-3">
+          <div className="flex  gap-4 mt-5">
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-full h-9 rounded ring-0 border border-gray-400 focus:right-0 focus:outline-none px-2 focus:border-[#E85C05]"
               type="text"
+              placeholder="Search by name (e.g. chicken)"
             />
 
             <button
@@ -138,14 +149,21 @@ const MainMenu = () => {
               Search
             </button>
           </div>
+          <p className="text-gray-400 text-sm mt-5">
+            {filterCount} items found
+          </p>
         </section>
 
         <section>
-          <div className="grid grid-cols-3 gap-5">
-            {filteredMenus.map((menu) => (
-              <RecipeCard key={menu.id} menu={menu} />
-            ))}
-          </div>
+          {filteredMenus.length > 0 ? (
+            <div className="grid grid-cols-3 gap-5">
+              {filteredMenus.map((menu) => (
+                <RecipeCard key={menu.id} menu={menu} />
+              ))}
+            </div>
+          ) : (
+            <p className="text-center mt-40 text-sm text-gray-400">No dishes found. Try different filters.</p>
+          )}
         </section>
       </div>
     </div>
