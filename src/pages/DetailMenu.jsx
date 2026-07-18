@@ -4,13 +4,13 @@ import menuData from "../data/menuData";
 import { Check, MoveLeft } from "lucide-react";
 
 const DetailMenu = () => {
-  const { id } = useParams();
-  const arr =
-    JSON.parse(localStorage.getItem("party_menu_saved_recipes")) || [];
-  const [IsToggle, setIsToggle] = useState(arr.includes(id));
+    const { id } = useParams();
+    const numId = Number(id);
+  const arr = JSON.parse(localStorage.getItem("party_menu_saved_recipes")) || [];
+  const [IsToggle, setIsToggle] = useState(arr.includes(numId));
 
  
-  const menuDetails = menuData.find((m) => m.id == id);
+  const menuDetails = menuData.find((m) => m.id == numId);
   const { ingredients } = menuDetails;
 
   const SaveRecipeTog = (id) => {
@@ -41,7 +41,7 @@ const DetailMenu = () => {
           {IsToggle ? (
             <button
               onClick={() => {
-                SaveRecipeTog(id);
+                SaveRecipeTog(numId);
                 setIsToggle((prev) => !prev);
               }}
               className="flex gap-1 border-green-400 text-green-400 hover:cursor-pointer p-2 border  rounded "
@@ -52,7 +52,7 @@ const DetailMenu = () => {
           ) : (
             <button
               onClick={() => {
-                SaveRecipeTog(id);
+                SaveRecipeTog(numId);
                 setIsToggle((prev) => !prev);
               }}
               className="hover:cursor-pointer  p-2 border  rounded "
