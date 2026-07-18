@@ -12,16 +12,16 @@ const DetailMenu = () => {
  
   const menuDetails = menuData.find((m) => m.id == id);
   const { ingredients } = menuDetails;
-  const recipesArr = [];
+
   const SaveRecipeTog = (id) => {
     if (arr.includes(id)) {
       const updated = arr.filter((i) => i !== id);
       localStorage.setItem("party_menu_saved_recipes", JSON.stringify(updated));
     } else {
-      recipesArr.push(id);
+      arr.push(id);
       localStorage.setItem(
         "party_menu_saved_recipes",
-        JSON.stringify(recipesArr),
+        JSON.stringify(arr),
       );
     }
   };
