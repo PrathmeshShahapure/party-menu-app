@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useUserInfo } from "../store/userStore"
 import Cookies from "js-cookie";
 import menuData from "../data/menuData.js"
+import RecipeCard from "../components/RecipeCard.jsx"
 
 const MainMenu = () => {
   const user = useUserInfo((state) => state.username);
@@ -142,36 +143,7 @@ const MainMenu = () => {
         <section>
           <div className="grid grid-cols-3 gap-5">
             {filteredMenus.map((menu) => (
-              <div key={menu.id} className="bg-[#1A1A22] rounded-2xl">
-                <div className="relative">
-                  <img
-                    src={menu.image}
-                    alt={menu.name}
-                    className="h-56 w-full object-cover rounded-t-2xl"
-                  />
-
-                  {/* Badge */}
-                  <span
-                    className={`absolute right-3 top-3 rounded-full px-3 py-1 text-xs font-semibold text-white
-      ${menu.isVeg ? "bg-green-700" : "bg-red-700"}`}
-                  >
-                    {menu.isVeg ? <p> Veg</p> : <p>Non Veg</p>}
-                  </span>
-                </div>
-                <div className="space-y-3 p-5">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-orange-500">
-                    {menu.category}
-                  </p>
-
-                  <h2 className="text-2xl font-bold text-white">{menu.name}</h2>
-
-                  <p className="line-clamp-2 text-sm text-gray-400">
-                    {menu.description}
-                  </p>
-
-                  <p className="text-sm text-gray-300">{menu.servings}</p>
-                </div>
-              </div>
+              <RecipeCard key={menu.id} menu={menu} />
             ))}
           </div>
         </section>

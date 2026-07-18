@@ -2,6 +2,9 @@ import { Route, Routes } from "react-router-dom";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import Signin from "./pages/Signin";
 import MainMenu from "./pages/MainMenu";
+import DetailMenu from "./pages/DetailMenu";
+import SavedRecipes from "./pages/SavedRecipes";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -16,6 +19,10 @@ function App() {
           </ProtectedRoutes>
         }
       />
+
+      <Route path="/menu/:id" element={<DetailMenu />} />
+      <Route path="/saved-recipes" element={<SavedRecipes/>} />
+      <Route path="*" element={<NotFound/>} />
     </Routes>
   );
 }
